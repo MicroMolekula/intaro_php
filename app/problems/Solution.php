@@ -44,8 +44,13 @@ class Solution
         function callback($value)
         {
             if (strlen($value) < 4) {
-
+                $value = str_split($value);
+                $zeroArray = array_fill(0, 4 - count($value), 0);
+                $value = array_merge($zeroArray, $value);
+                $value = implode($value);
+                return $value;
             }
+            return $value;
         }
 
         $inputArray = [];
@@ -53,9 +58,9 @@ class Solution
         foreach ($tmpArray as $item) {
             $item = explode(":", $item);
             $item = array_diff($item, array(''));
-            array_map();
+            $item = callback($item);
+            
             $inputArray[] = $item;
-
         }
         return $inputArray;
     }
