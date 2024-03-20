@@ -19,14 +19,18 @@ function printResult($zadacha)
 
 
 $ex1 = new Exam('A');
-//$zadacha1 = $ex1->examTests('problems\Solution::threeSharpAxes');
+$zadacha1 = $ex1->examTests('problems\Solution::threeSharpAxes');
 
 $ex2 = new Exam('B');
-//$ex2->examTests('problems\Solution::sizeMatters');
+$zadacha2 = $ex2->examTests('problems\Solution::sizeMatters');
+
 ?>
 
-<!-- <div>Три острых топора</div> -->
-<?php //printResult($zadacha1);?>
+<div>Три острых топора</div>
+<?php printResult($zadacha1); ?>
+<div></div>
+<div>Размер имеет значение</div>
+<?php printResult($zadacha2); ?>
 <?php
 echo '<pre>';
 $ex2->examTests('problems\Solution::sizeMatters');
