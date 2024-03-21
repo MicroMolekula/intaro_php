@@ -40,7 +40,7 @@ class Solution
     }
 
     // Задача "Размер имеет значение"
-    public static function sizeMatters($input)
+    public static function sizeMatters($input) : string
     {
         $inputArray = [];
         $tmpArray = explode("\n", $input);
@@ -79,7 +79,7 @@ class Solution
     }
 
     // Задача "Семь раз отмерь, один раз отрежь"
-    public static function cutOnce($input)
+    public static function cutOnce($input) : string
     {
         $inputArray = array_map(function ($v){
             return preg_split("/(?<=\>)\s/", $v);
@@ -136,7 +136,7 @@ class Solution
     }
 
     // Задача 1 на регулярки
-    public static function regProblem1($input)
+    public static function regProblem1($input) : string
     {
         return preg_replace_callback("#'\d+'#", function ($matches){
             $v = trim($matches[0], "'");
@@ -145,7 +145,7 @@ class Solution
     }
 
     // Задача 2 на регулярки
-    public static function regProblem2($input)
+    public static function regProblem2($input) : string
     {
         preg_match("#(?<=&RN=)(\d+-\d+)(?=&)#", $input, $matches);
         return "http://sozd.parlament.gov.ru/bill/$matches[0]";

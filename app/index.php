@@ -70,7 +70,7 @@ margin-bottom: 3rem;">
         <div>Ответ: <?= Solution::regProblem1($input1) ?></div>
     <?php } ?>
 </div>
-<div>
+<div style="margin-bottom: 3rem;">
     <div>Задача 2 на регулярки</div>
     <form action="index.php" method="post">
         <input style="width: 100%" type="text" name="input2" value="<?= $input2 ?>">
@@ -81,6 +81,7 @@ margin-bottom: 3rem;">
         <div>Ответ: <?= Solution::regProblem2($input2) ?></div>
     <?php } ?>
 </div>
+<!--<div>Интерактивное тестирование</div>-->
 <?php
 //echo '<pre>';
 //$ex3->examIter('problems\Solution::cutOnce', 0);

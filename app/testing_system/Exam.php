@@ -35,7 +35,7 @@ class Exam
         $this->initTests();
         print_r(call_user_func($callback, $this->tests['dat'][$numberTest]));
         print_r($this->tests['ans'][$numberTest]  == call_user_func($callback, $this->tests['dat'][$numberTest]) ?
-            'Правильно' : 'Не правильно');
+            '<br><br>Правильно' : '<br><br>Не правильно');
     }
 
     public function examTests($callback)
