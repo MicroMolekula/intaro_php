@@ -126,7 +126,6 @@ class Solution
 
         $output = implode("\n", $result);
 
-
         $outputArray = array_map(function ($v) {
             return array_map(function ($s){
                 return htmlspecialchars($s);
@@ -134,5 +133,21 @@ class Solution
         }, $inputArray);
 
         return $output;
+    }
+
+    // Задача 1 на регулярки
+    public static function regProblem1($input)
+    {
+        return preg_replace_callback("#'\d+'#", function ($matches){
+            $v = trim($matches[0], "'");
+            return "'" . (int)$v*2 . "'";
+        }, $input);
+    }
+
+    // Задача 2 на регулярки
+    public static function regProblem2($input)
+    {
+        preg_match("#(?<=&RN=)(\d+-\d+)(?=&)#", $input, $matches);
+        return "http://sozd.parlament.gov.ru/bill/$matches[0]";
     }
 }

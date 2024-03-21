@@ -45,7 +45,7 @@ class Exam
         for ($i = 0; $i < count($this->tests['dat']); $i++){
             $result[] = $this->tests['ans'][$i]  == call_user_func($callback, $this->tests['dat'][$i]);
             if(!($this->tests['ans'][$i]  == call_user_func($callback, $this->tests['dat'][$i]))){
-                print_r("<pre>" . "$i" . call_user_func($callback, $this->tests['dat'][$i]) . "</pre>");
+                print_r("<pre>" . "$i<br>" . call_user_func($callback, $this->tests['dat'][$i]) . "</pre>");
             }
         }
         return $result;
