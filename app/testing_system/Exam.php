@@ -30,13 +30,23 @@ class Exam
         }
     }
 
+    public function examIter($callback, $numberTest)
+    {
+        $this->initTests();
+        print_r(call_user_func($callback, $this->tests['dat'][$numberTest]));
+        print_r($this->tests['ans'][$numberTest]  == call_user_func($callback, $this->tests['dat'][$numberTest]) ?
+            'Правильно' : 'Не правильно');
+    }
+
     public function examTests($callback)
     {
         $this->initTests();
-//        print_r(call_user_func($callback, $this->tests['dat'][1]));
         $result = [];
         for ($i = 0; $i < count($this->tests['dat']); $i++){
             $result[] = $this->tests['ans'][$i]  == call_user_func($callback, $this->tests['dat'][$i]);
+            if(!($this->tests['ans'][$i]  == call_user_func($callback, $this->tests['dat'][$i]))){
+                print_r("<pre>" . "$i" . call_user_func($callback, $this->tests['dat'][$i]) . "</pre>");
+            }
         }
         return $result;
     }

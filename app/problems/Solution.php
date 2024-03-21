@@ -79,9 +79,60 @@ class Solution
     }
 
     // Задача "Семь раз отмерь, один раз отрежь"
-    public static function cutOnce()
+    public static function cutOnce($input)
     {
-        // \+7 \(\d{3}\) \d{3}-\d{2}-\d{2}
-        // ^([0-2][0-9]|30).([0-9]|[1][0-1]|12).(\d{4}) ([0-1][0-9]|[2][0-3]):([0-5][0-9]|60)
+        $inputArray = array_map(function ($v){
+            return preg_split("/(?<=\>)\s/", $v);
+        }, explode("\n", $input));
+
+        $result = array_map(function ($v) {
+            switch ($v[1][0]) {
+                case 'S':
+                    $params = explode(" ", $v[1]);
+                    return strlen(trim($v[0], "<>")) <= (int)$params[2] &&
+                        strlen(trim($v[0], "<>")) >= (int)$params[1] ?
+                        "OK" : "FAIL";
+                case 'N':
+                    $params = explode(" ", $v[1]);
+                    $str = trim($v[0], "<>");
+                    if(preg_match("#^(-\d+)$|^(\d+)$#", $str)){
+                        return (int)$str <= (int)$params[2] &&
+                        (int)$str >= (int)$params[1] ?
+                            "OK" : "FAIL";
+                    }
+                    return "FAIL";
+                case 'P':
+                    return preg_match('#^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$#', trim($v[0], "<>")) ?
+                        "OK" : "FAIL";
+                case 'D':
+                    $matches = [];
+                    if(preg_match('#^([0-9]|[0-2][0-9]|[3][0-1]).([0][0-9]|[1][0-1]|[0-9]|12).(\d{4}) ([0-1][0-9]|[2][0-3]|[0-9]):([0-5][0-9])$#',
+                        trim($v[0], "<>"), $matches)) {
+                        if((int)$matches[2] == 2){
+                            if ((int)$matches[1] <= 28 && (int)$matches[3] % 4 != 0) return "OK";
+                            if ((int)$matches[1] <= 29 && (int)$matches[3] % 4 == 0) return "OK";
+                            else return "FAIL";
+                        }
+                        return "OK";
+                    }
+                    return "FAIL";
+                case 'E':
+                    return preg_match('#^(^[a-zA-Z0-9][a-zA-Z0-9_]{3,29})@([a-zA-Z]{2,30})\.([a-z]{2,10})$#',
+                        trim($v[0], "<>")) ?
+                        "OK" : "FAIL";
+            }
+            return "FAIL";
+        }, $inputArray);
+
+        $output = implode("\n", $result);
+
+
+        $outputArray = array_map(function ($v) {
+            return array_map(function ($s){
+                return htmlspecialchars($s);
+            }, $v);
+        }, $inputArray);
+
+        return $output;
     }
 }
