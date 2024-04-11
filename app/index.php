@@ -8,7 +8,7 @@
     <title>Лабораторные работы по PHP</title>
 </head>
 <body>
-    <a href="lab1_2/lab1_2.php">Задание 1 и 2</a>
-
+    <a href="lab1_2/lab1_2.php">Задание 1 и 2</a> <br>
+    <a href="lab3/index.php">Задание 3</a>
 </body>
 </html>

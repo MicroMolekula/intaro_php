@@ -1,1 +1,3 @@
 .idea/php.xml
+app/lab3/vendor
+docker/db-data
