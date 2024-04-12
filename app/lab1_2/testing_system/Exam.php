@@ -4,7 +4,7 @@ namespace testing_system;
 
 class Exam
 {
-    // Свойство класса, указывающее на дерикторию теста
+    // Свойство класса, указывающее на директорию теста
     private $dirTests;
     // Ассоциативный массив с тестами
     private $tests;
@@ -13,7 +13,7 @@ class Exam
     public function __construct($dirTests)
     {
         $this->dirTests = "tests/$dirTests";
-        // Создаемый массив
+        // Создаваемый массив
         $this->tests = [
             'dat' => [],
             'ans' => []

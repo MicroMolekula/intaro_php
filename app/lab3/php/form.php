@@ -22,7 +22,8 @@ $post = filter_request($post);
 
 if(!array_search(false, $post)){
     $date = new DateTime('now', timezone_open('Europe/Moscow'));
-    $flag_db = add_values_bd($pdo, $post, $date->format("Y-m-d H:i:s"));
+    $ch_mail = check_email($pdo, $post, $date);
+    $flag_db = $ch_mail == 'ok' ? add_values_bd($pdo, $post, $date->format("Y-m-d H:i:s")) : false;
     if($flag_db){
         $response_mail = "
             <div><b>Отправлено сообщение из формы обратной связи</b></div>
@@ -38,6 +39,7 @@ if(!array_search(false, $post)){
 
         $date_connection = $date->add(new DateInterval('PT1H30M'));
         $response = [
+            'message' => 'ok',
             'surname' => $post['sname'],
             'name' => $post['fname'],
             'middle_name' => $post['mname'],
@@ -48,7 +50,10 @@ if(!array_search(false, $post)){
         $responseJson = json_encode($response);
         echo $responseJson;
     } else {
-        print_r("Error db");
+        echo json_encode([
+            'message' => 'fail',
+            'date' => $ch_mail,
+        ]);
     }
 } else {
     print_r("Error");

@@ -20,3 +20,21 @@ function add_values_bd(PDO $pdo, $values, $date)
         return false;
     }
 }
+
+function check_email(PDO $pdo, $values, DateTime $date)
+{
+    try {
+        $sql = "SELECT r.email, r.date FROM request r";
+        $result = $pdo->query($sql);
+        while ($row = $result->fetch()) {
+            if ($row['email'] === $values['email']){
+                if (($date->getTimestamp() - strtotime($row['date']))< 3600){
+                    return date("'H:i:s d:m:Y'", strtotime($row['date']) + 3600);
+                }
+            }
+        }
+        return 'ok';
+    } catch (PDOException) {
+        return false;
+    }
+}

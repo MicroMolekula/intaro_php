@@ -10,7 +10,9 @@ let errorsDiv = [
 
 function procRequest(data) {
     console.log(data);
-    let htmlResponse = `
+    let htmlResponse;
+    if(data['message'] == 'ok') {
+        htmlResponse = `
         <div><b>Отправлено сообщение из формы обратной связи</b></div>
         <div><b>Имя:</b> ${data['name']}</div>
         <div><b>Фамилия:</b> ${data['surname']}</div>
@@ -18,8 +20,13 @@ function procRequest(data) {
         <div><b>E-mail:</b> ${data['email']}</div>
         <div><b>Телефон:</b> ${data['phone']}</div>
         <div>С вами свяжутся после <b>${data['date']}</b></div>
-    `;
-    responseDiv.innerHTML = htmlResponse;
+        `;  
+        responseDiv.innerHTML = htmlResponse;
+    }
+    else if (data['message'] == 'fail') {
+        htmlResponse = `<div>Ошибка, повторить отправку можно будет после ${data['date'].trim("\'")}</div>`;  
+        responseDiv.innerHTML = htmlResponse;
+    }
 }
 
 function ajax(data){
@@ -42,7 +49,6 @@ function ajax(data){
     });
     xhttp.send(jsonData);
 }
-
 
 
 submitForm.addEventListener("click", function () {
