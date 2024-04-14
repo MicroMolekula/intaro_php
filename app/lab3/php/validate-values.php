@@ -1,7 +1,9 @@
 <?php
 
+// Функция валидации данных, которые пришли с фронта
 function filter_request($values)
 {
+    // Формируем настройки для валидации
     $options_filter = [
         'fname' => [
             'filter' => FILTER_VALIDATE_REGEXP,
@@ -36,5 +38,6 @@ function filter_request($values)
         ],
     ];
 
+    // Возвращаем валидированные данные
     return filter_var_array($values, $options_filter);
 }
