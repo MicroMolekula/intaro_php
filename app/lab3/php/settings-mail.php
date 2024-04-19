@@ -7,7 +7,7 @@ return [
         'port' => 465,
         'secure' => 'ssl',
         'username' => 'mmiamoto284@gmail.com',
-        'password' => '',
+        'password' => 'qfpmdyljanxlfdml',
         'charset' => 'UTF-8',
         'from_email' => 'mmiamoto284@gmail.com',
         'from_name' => 'Ivan',

@@ -20,7 +20,7 @@ unset($post["name"]);
 
 $post = filter_request($post);
 
-if(!array_search(false, $post)){
+if (!array_search(false, $post)){
     $date = new DateTime('now', timezone_open('Europe/Moscow'));
     $ch_mail = check_email($pdo, $post, $date);
     $flag_db = $ch_mail == 'ok' ? add_values_bd($pdo, $post, $date->format("Y-m-d H:i:s")) : false;
@@ -35,7 +35,7 @@ if(!array_search(false, $post)){
             <div><b>Сообщение:</b> {$post['comment']}</div>
             <div><b>Дата:</b> {$date->format('H:i:s d:m:Y')}</div>
         ";
-        send_mail($mail_settings['mail_settings_prod'], "mmiamoto284@gmail.com", "Отправлено сообщение из формы обратной связи", $response_mail);
+        send_mail($mail_settings['mail_settings_prod'], "makskriper9@gmail.com", "Отправлено сообщение из формы обратной связи", $response_mail);
 
         $date_connection = $date->add(new DateInterval('PT1H30M'));
         $response = [
