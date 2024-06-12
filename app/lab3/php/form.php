@@ -27,7 +27,6 @@ unset($post["name"]);
 // Валидируем данные
 $post = filter_request($post);
 
-
 // Проверка результата валидации
 if(!array_search(false, $post)){
     // Создание объекта даты и времени по МСК
@@ -49,6 +48,7 @@ if(!array_search(false, $post)){
             <div><b>Сообщение:</b> {$post['comment']}</div>
             <div><b>Дата:</b> {$date->format('H:i:s d:m:Y')}</div>
         ";
+
         // Отправляем письма на указанную почту
         send_mail($mail_settings['mail_settings_prod'], "mmiamoto284@gmail.com", "Отправлено сообщение из формы обратной связи", $response_mail);
 
