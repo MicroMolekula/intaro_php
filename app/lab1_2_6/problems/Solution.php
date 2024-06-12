@@ -193,4 +193,6 @@ class Solution
         // И помещаем этот параметр в новый url
         return "http://sozd.parlament.gov.ru/bill/$matches[0]";
     }
+
+    
 }
