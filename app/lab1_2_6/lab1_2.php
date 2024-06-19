@@ -1,5 +1,5 @@
 <?php
-namespace main;
+namespace lab12;
 
 include './testing_system/Exam.php';
 include './problems/Solution.php';
@@ -31,13 +31,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['input2']){
 }
 
 
-$ex1 = new Exam('A');
+$ex1 = new Exam('tests/A');
 $zadacha1 = $ex1->examTests('problems\Solution::threeSharpAxes');
 
-$ex2 = new Exam('B');
+$ex2 = new Exam('tests/B');
 $zadacha2 = $ex2->examTests('problems\Solution::sizeMatters');
 
-$ex3 = new Exam('C');
+$ex3 = new Exam('tests/C');
 $zadacha3 = $ex3->examTests('problems\Solution::cutOnce');
 
 ?>

@@ -12,7 +12,7 @@ class Exam
     // При создании класса указываем название директории с тестами
     public function __construct($dirTests)
     {
-        $this->dirTests = "tests/$dirTests";
+        $this->dirTests = "$dirTests";
         // Создаваемый массив
         $this->tests = [
             'dat' => [],
@@ -43,8 +43,8 @@ class Exam
     {
         $this->initTests();
         print_r(call_user_func($callback, $this->tests['dat'][$numberTest]));
-        print_r($this->tests['ans'][$numberTest]  == call_user_func($callback, $this->tests['dat'][$numberTest]) ?
-            '<br><br>Правильно' : '<br><br>Не правильно');
+        // print_r($this->tests['ans'][$numberTest]  == call_user_func($callback, $this->tests['dat'][$numberTest]) ?
+        //     '<br><br>Правильно' : '<br><br>Не правильно');
     }
 
     // Метод для проверки функции на всех тестах
@@ -62,6 +62,38 @@ class Exam
             if(!($this->tests['ans'][$i]  == call_user_func($callback, $this->tests['dat'][$i]))){
                 print_r("<pre>" . "$i<br>" . call_user_func($callback, $this->tests['dat'][$i]) . "</pre>");
             }
+        }
+        return $result;
+    }
+
+    private function measEr($input1, $input2)
+    {
+        $input1 = explode("\n", $input1);
+        $input2 = explode("\n", $input2);
+        $flags = [];
+        for ($i = 0; $i < count($input1); $i++){
+            $tmp1 = (float)explode(' ', $input1[$i])[1];
+            $tmp2 = (float)explode(' ', $input2[$i])[1];
+            $flags[] = abs((float)($tmp1 - $tmp2)) < 0.01;
+        }
+        foreach ($flags as $flag){
+            if(!$flag){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function examTestsWithEr($callback)
+    {
+        // Инициализируем тесты
+        $this->initTests();
+        // Создаем массив, в который будем помещать буллевые значения
+        $result = [];
+        for ($i = 0; $i < count($this->tests['dat']); $i++){
+            // Сравниваем ответ из теста и значение которое возвращает функция с данными на вход из теста
+            // После чего помещаем результат в массив результата
+            $result[] = $this->measEr($this->tests['ans'][$i], call_user_func($callback, $this->tests['dat'][$i]));
         }
         return $result;
     }
